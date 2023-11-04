@@ -1,18 +1,27 @@
 'use client';
 
 import React, { FC } from 'react';
+import Link from 'next/link';
+// libs
+import { useConvexAuth } from 'convex/react';
+import { SignInButton, UserButton, SignUpButton } from '@clerk/clerk-react';
 // hooks
 import { useScrollTop } from '@/hooks/useScrollTop';
 // components
 import { Logo } from './Logo';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { Spinner } from '@/components/Spinner';
 
 import { Button } from '@/components/ui/button';
+// constants
+import { routes } from '@/constants/routes';
 // utils
 import { cn } from '@/lib/utils';
 
 export const Navbar: FC = () => {
+  const { isAuthenticated, isLoading } = useConvexAuth();
   const scrolled = useScrollTop();
+
   return (
     <div
       className={cn(
@@ -22,10 +31,27 @@ export const Navbar: FC = () => {
     >
       <Logo />
       <div className="md:ml-auto md:justify-end justify-between w-full flex items-center gap-x-2">
-        <Button variant="ghost" size="sm">
-          Log in
-        </Button>
-        <Button size="sm">Get Notes free</Button>
+        {isLoading && <Spinner />}
+        {!isAuthenticated && !isLoading && (
+          <>
+            <SignInButton mode="modal">
+              <Button variant="ghost" size="sm">
+                Log in
+              </Button>
+            </SignInButton>
+            <SignUpButton mode="modal">
+              <Button size="sm">Get Jotion free</Button>
+            </SignUpButton>
+          </>
+        )}
+        {isAuthenticated && !isLoading && (
+          <>
+            <Button variant="ghost" size="sm" asChild>
+              <Link href={routes.documents}>Enter Notes</Link>
+            </Button>
+            <UserButton afterSignOutUrl={routes.landingPage} />
+          </>
+        )}
         <ThemeToggle />
       </div>
     </div>
