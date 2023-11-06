@@ -126,6 +126,20 @@ export const Navigation = () => {
     });
   };
 
+  const handleSearch = () => {
+    if (isMobile) {
+      collapse();
+    }
+    search.onOpen();
+  };
+
+  const handleSettings = () => {
+    if (isMobile) {
+      collapse();
+    }
+    settings.onOpen();
+  };
+
   useEffect(() => {
     if (isMobile) {
       collapse();
@@ -162,8 +176,8 @@ export const Navigation = () => {
         </div>
         <div>
           <UserItem />
-          <Item label="Search" icon={Search} isSearch onClick={search.onOpen} />
-          <Item label="Settings" icon={Settings} onClick={settings.onOpen} />
+          <Item label="Search" icon={Search} isSearch onClick={handleSearch} />
+          <Item label="Settings" icon={Settings} onClick={handleSettings} />
           <Item onClick={handleCreate} label="New page" icon={PlusCircle} />
         </div>
         <div className="mt-4">
