@@ -40,7 +40,7 @@ export const Navbar: FC = () => {
               </Button>
             </SignInButton>
             <SignUpButton mode="modal">
-              <Button size="sm">Get Jotion free</Button>
+              <Button size="sm">Get Notes free</Button>
             </SignUpButton>
           </>
         )}
