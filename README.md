@@ -1,4 +1,6 @@
 This is a repository for Fullstack Notion Clone: Next.js 14, React, Convex, Tailwind
+
+### Application
 Working app: https://notes-application-brown.vercel.app/
 
 Key Features:
